@@ -20,6 +20,11 @@ MOTD="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/motd"
 # Private key of Vagrant (you probable don't want to change this)
 VAGRANT_PRIVATE_KEY="https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub"
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+
 ################################################################################
 # PACKAGE INSTALLATION
 ################################################################################
@@ -45,7 +50,7 @@ pkg upgrade -y
 
 # Install required packages
 for p in $INSTALLED_PACKAGES; do
-    pkg install -y -r "$p"
+    pkg install -y "$p"
 done
 
 rm -rf /usr/ports
