@@ -7,15 +7,15 @@
 INSTALLED_PACKAGES="ca_root_nss virtualbox-ose-additions bash sudo ezjail"
 
 # Configuration files
-MAKE_CONF="https://raw.github.com/wunki/vagrant-freebsd/master/etc/make.conf"
-RC_CONF="https://raw.github.com/wunki/vagrant-freebsd/master/etc/rc.conf"
-RESOLV_CONF="https://raw.github.com/wunki/vagrant-freebsd/master/etc/resolv.conf"
-LOADER_CONF="https://raw.github.com/wunki/vagrant-freebsd/master/boot/loader.conf"
-EZJAIL_CONF="https://raw.github.com/wunki/vagrant-freebsd/master/usr/local/etc/ezjail.conf"
-PF_CONF="https://raw.github.com/wunki/vagrant-freebsd/master/etc/pf.conf"
+MAKE_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/make.conf"
+RC_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/rc.conf"
+RESOLV_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/resolv.conf"
+LOADER_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/boot/loader.conf"
+EZJAIL_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/usr/local/etc/ezjail.conf"
+PF_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/pf.conf"
 
 # Message of the day
-MOTD="https://raw.github.com/wunki/vagrant-freebsd/master/etc/motd"
+MOTD="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/motd"
 
 # Private key of Vagrant (you probable don't want to change this)
 VAGRANT_PRIVATE_KEY="https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub"
@@ -24,29 +24,14 @@ VAGRANT_PRIVATE_KEY="https://raw.github.com/mitchellh/vagrant/master/keys/vagran
 # PACKAGE INSTALLATION
 ################################################################################
 
-# Use my own package repository to keep the size as small as possible.
-mkdir -p /usr/local/etc/pkg/repos
-touch /usr/local/etc/pkg/repos/wunki.conf
-cat <<EOT >> /usr/local/etc/pkg/repos/wunki.conf
-wunki: {
-  url: "http://pkg.wunki.org/10_1-amd64-server-default",
-  enabled: yes
-}
-EOT
-
 # Setup pkgng
-cp /usr/local/etc/pkg.conf.sample /usr/local/etc/pkg.conf
 pkg update
 pkg upgrade -y
 
 # Install required packages
 for p in $INSTALLED_PACKAGES; do
-    pkg install -y -r wunki "$p"
+    pkg install -y -r "$p"
 done
-
-# Remove the wunki repository
-rm /usr/local/etc/pkg/repos/wunki.conf
-pkg update
 
 ################################################################################
 # Configuration
