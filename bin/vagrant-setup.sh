@@ -98,9 +98,9 @@ fetch -o /usr/local/etc/ezjail.conf $EZJAIL_CONF
 fetch -o /usr/local/etc/pf.conf $PF_CONF
 
 # encoding
-echo "export LC_ALL=en_US.UTF-8" >> ~/.profile
-echo "export LANG=en_US.UTF-8" >> ~/.profile
-echo "export LANGUAGE=en_US.UTF-8" >> ~/.profile
+echo "export LC_ALL=en_US.UTF-8" >> /home/vagrant/.profile
+echo "export LANG=en_US.UTF-8" >> /home/vagrant/.profile
+echo "export LANGUAGE=en_US.UTF-8" >> /home/vagrant/.profile
 
 
 ################################################################################
