@@ -24,6 +24,21 @@ VAGRANT_PRIVATE_KEY="https://raw.github.com/mitchellh/vagrant/master/keys/vagran
 # PACKAGE INSTALLATION
 ################################################################################
 
+portsnap fetch extract
+
+cd /usr/ports/lang/erlang
+make config-recursive install clean
+pkg lock --yes erlang
+
+cd /usr/ports/lang/elixir
+make config install clean
+pkg lock --yes elixir
+
+cd /usr/ports/devel/rebar
+make install
+
+cd /tmp
+
 # Setup pkgng
 pkg update
 pkg upgrade -y
@@ -32,6 +47,8 @@ pkg upgrade -y
 for p in $INSTALLED_PACKAGES; do
     pkg install -y -r "$p"
 done
+
+rm -rf /usr/ports
 
 ################################################################################
 # Configuration
@@ -74,6 +91,11 @@ fetch -o /usr/local/etc/ezjail.conf $EZJAIL_CONF
 
 # pf
 fetch -o /usr/local/etc/pf.conf $PF_CONF
+
+# encoding
+echo "export LC_ALL=en_US.UTF-8" >> ~/.profile
+echo "export LANG=en_US.UTF-8" >> ~/.profile
+echo "export LANGUAGE=en_US.UTF-8" >> ~/.profile
 
 
 ################################################################################
