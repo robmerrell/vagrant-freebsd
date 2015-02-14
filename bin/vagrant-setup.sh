@@ -4,7 +4,7 @@
 ################################################################################
 
 # Packages which are pre-installed
-INSTALLED_PACKAGES="ca_root_nss virtualbox-ose-additions bash sudo ezjail"
+INSTALLED_PACKAGES="ca_root_nss virtualbox-ose-additions bash sudo ezjail wget curl"
 
 # Configuration files
 MAKE_CONF="https://raw.github.com/robmerrell/vagrant-freebsd/master/etc/make.conf"
@@ -102,6 +102,8 @@ echo "export LC_ALL=en_US.UTF-8" >> /home/vagrant/.profile
 echo "export LANG=en_US.UTF-8" >> /home/vagrant/.profile
 echo "export LANGUAGE=en_US.UTF-8" >> /home/vagrant/.profile
 
+# Cert
+ln -s /usr/local/share/certs/ca-root-nss.crt /etc/ssl/cert.pem
 
 ################################################################################
 # CLEANUP
